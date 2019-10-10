@@ -5,9 +5,12 @@
 //psuedocode
 // convert the str to array
 // 1. create two stack one for number one for the operator
+//convert str to number
 // 2. push the number and the operator in the stack
 // 3. if the operator = * then pop out the last in the num stack, calculate the result, push back to the number stack
 // 4. at the end return the sum of all the puls in the number stack
+
+//run time is o(n), space complexity is o(n/2)
 
 const evaluatePushMultiply = function(s) {
   s = s.split('');
@@ -29,7 +32,7 @@ const evaluatePushMultiply = function(s) {
     }
   }
 
-  return console.log(numStack.reduce((currentTotal, item) => +currentTotal + +item));
+  return console.log(numStack.reduce((currentTotal, item) => currentTotal + item));
 };
 
 evaluatePushMultiply('2+3*4+5*6');
