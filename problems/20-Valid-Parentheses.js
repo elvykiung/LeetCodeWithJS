@@ -47,21 +47,34 @@ const findValidParenthese = function(str) {
 
 const isValidParentheses = function(s) {
   let stack = [];
-  let map = { '(': ')', '{': '}', '[': ']' };
+  let openParentheses = { ')': '(', '}': '{', ']': '[' };
+  let closeParentheses = { '(': ')', '{': '}', '[': ']' };
 
   for (let i = 0; i < s.length; i++) {
     const chr = s[i];
     if (chr === '(' || chr === '{' || chr === '[') {
       stack.push(chr);
     } else {
-      let last = stack.pop();
-      if (chr !== map[last]) {
-        return false;
+      if (chr === ')' || chr === '}' || chr === ']') {
+        let last = stack.pop();
+        if (!last) {
+          return openParentheses[chr];
+        }
+        if (chr !== closeParentheses[last]) {
+          return closeParentheses[last];
+        }
       }
     }
   }
+
   if (stack.length !== 0) {
-    return false;
+    let last = stack.pop();
+    return closeParentheses[last];
   }
   return true;
 };
+
+console.log(findValidParenthese(' – 2 * ( 3 + 5(sasdfasdfasd)'));
+console.log(findValidParenthese('[{(}]'));
+console.log(findValidParenthese('{{{'));
+console.log(findValidParenthese('}}}'));
